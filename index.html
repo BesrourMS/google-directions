@@ -34,8 +34,10 @@
 			}
 		}
 		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-			var start = navigator.geolocation.getCurrentPosition(affichePosition);		
+			var start = navigator.geolocation.getCurrentPosition(affichePosition);	
+			console.log(start);
 			var end = '33.8183834,10.9713163';
+			console.log(end);
 			directionsService.route({
 			  origin: start,
 			  destination: end,
