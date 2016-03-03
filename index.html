@@ -135,21 +135,22 @@
         document.getElementById('end').addEventListener('change', onChangeHandler);
       }
       
-      	function getLocation() {
-    		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
-    		} else {
-        		x.innerHTML = "Geolocation is not supported by this browser.";
-	 	}
-	}
-	
-	function showPosition(position) {
-		var latlong = position.coords.latitude +","+ position.coords.longitude;  
-	    	return latlong;
-	}
+
 
       	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        	var start = getLocation();
+        	function success(pos) {
+		  var crd = pos.coords;
+		
+		  console.log('Your current position is:');
+		  console.log('Latitude : ' + crd.latitude);
+		  console.log('Longitude: ' + crd.longitude);
+		  console.log('More or less ' + crd.accuracy + ' meters.');
+		};
+		
+		function error(err) {
+		  console.warn('ERROR(' + err.code + '): ' + err.message);
+		};
+        	var start = navigator.geolocation.getCurrentPosition(success, error);
         	console.log(start);
         	var end = document.getElementById('end').value;
 	        directionsService.route({
