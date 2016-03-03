@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 : Géolocalisation avec Carte Google Maps</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.css">
+
+		<style>
+			html, body, #map {margin: 0; padding: 0; height: 100vh;}
+		</style>
+	</head>
+	<body style="margin:0px;">
+		<!-- Un élément HTML pour recueillir l’affichage -->
+		<div id="right-panel"></div>
+		<!-- Un élément HTML pour recueillir la carte -->
+		<div id="map"></div>
+		<!-- Chargement de l'API Google maps -->
+		<script>
+		function initMap() {
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var directionsService = new google.maps.DirectionsService;
+			var map = new google.maps.Map(document.getElementById('map'), {
+			  zoom: 7,
+			  center: {lat: 33.8074857, lng: 10.9925425}
+			});
+			directionsDisplay.setMap(map);
+			directionsDisplay.setPanel(document.getElementById('right-panel'));
+			calculateAndDisplayRoute(directionsService, directionsDisplay);
+		}
+
+		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+			if(navigator.geolocation) {
+				function affichePosition(position) {
+					var start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				}
+				navigator.geolocation.getCurrentPosition(affichePosition);
+			}
+			var end = '33.8183834,10.9713163';
+			directionsService.route({
+			  origin: start,
+			  destination: end,
+			  travelMode: google.maps.TravelMode.DRIVING
+			}, function(response, status) {
+			  if (status === google.maps.DirectionsStatus.OK) {
+				directionsDisplay.setDirections(response);
+			  } else {
+				window.alert('Directions request failed due to ' + status);
+			  }
+			});
+		}
+		</script>
+		<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH3GBNl7UFpLh-f7slP-Hl1JW8-VDMrbs&callback=initMap">
+	</body>
+</html>
