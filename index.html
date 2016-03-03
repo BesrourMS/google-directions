@@ -5,6 +5,9 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Displaying text directions with <code>setPanel()</code></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.css">
     <style>
       html, body {
         height: 100%;
@@ -131,9 +134,14 @@
         document.getElementById('start').addEventListener('change', onChangeHandler);
         document.getElementById('end').addEventListener('change', onChangeHandler);
       }
+      
+      function affichePosition(position) {
+					var start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			}
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
+        var start = navigator.geolocation.getCurrentPosition(affichePosition);
+        console.log(start);
         var end = document.getElementById('end').value;
         directionsService.route({
           origin: start,
