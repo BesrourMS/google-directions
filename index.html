@@ -145,25 +145,27 @@
 		  console.log('Latitude : ' + crd.latitude);
 		  console.log('Longitude: ' + crd.longitude);
 		  console.log('More or less ' + crd.accuracy + ' meters.');
+		  var start = crd.latitude+","+crd.longitude;
+        	  console.log(start);
+	        	var end = document.getElementById('end').value;
+		        directionsService.route({
+		          origin: start,
+		          destination: end,
+		          travelMode: google.maps.TravelMode.DRIVING
+		        }, function(response, status) {
+		          if (status === google.maps.DirectionsStatus.OK) {
+		            directionsDisplay.setDirections(response);
+		          } else {
+		            window.alert('Directions request failed due to ' + status);
+		          }
+		        });
 		};
 		
 		function error(err) {
 		  console.warn('ERROR(' + err.code + '): ' + err.message);
 		};
-        	var start = navigator.geolocation.getCurrentPosition(success, error);
-        	console.log(start);
-        	var end = document.getElementById('end').value;
-	        directionsService.route({
-	          origin: start,
-	          destination: end,
-	          travelMode: google.maps.TravelMode.DRIVING
-	        }, function(response, status) {
-	          if (status === google.maps.DirectionsStatus.OK) {
-	            directionsDisplay.setDirections(response);
-	          } else {
-	            window.alert('Directions request failed due to ' + status);
-	          }
-	        });
+        	navigator.geolocation.getCurrentPosition(success, error);
+        
       	}
     </script>
     <script async defer
