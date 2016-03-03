@@ -135,12 +135,20 @@
         document.getElementById('end').addEventListener('change', onChangeHandler);
       }
       
-      function affichePosition(position) {
-					var start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			}
+      function getLocation() {
+    	if (navigator.geolocation) {
+		 navigator.geolocation.getCurrentPosition(showPosition);
+    	} else {
+        	x.innerHTML = "Geolocation is not supported by this browser.";
+	 }
+	}
+	function showPosition(position) {
+	    var latlong= position.coords.latitude +,+ position.coords.longitude;  
+	    return latlong;
+	}
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = navigator.geolocation.getCurrentPosition(affichePosition);
+        var start = getLocation();
         console.log(start);
         var end = document.getElementById('end').value;
         directionsService.route({
