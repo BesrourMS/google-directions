@@ -135,34 +135,35 @@
         document.getElementById('end').addEventListener('change', onChangeHandler);
       }
       
-      function getLocation() {
-    	if (navigator.geolocation) {
-		 navigator.geolocation.getCurrentPosition(showPosition);
-    	} else {
-        	x.innerHTML = "Geolocation is not supported by this browser.";
-	 }
+      	function getLocation() {
+    		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+    		} else {
+        		x.innerHTML = "Geolocation is not supported by this browser.";
+	 	}
 	}
+	
 	function showPosition(position) {
-	    var latlong = position.coords.latitude +","+ position.coords.longitude;  
-	    return latlong;
+		var latlong = position.coords.latitude +","+ position.coords.longitude;  
+	    	return latlong;
 	}
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = getLocation();
-        console.log(start);
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: google.maps.TravelMode.DRIVING
-        }, function(response, status) {
-          if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
+      	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        	var start = getLocation();
+        	console.log(start);
+        	var end = document.getElementById('end').value;
+	        directionsService.route({
+	          origin: start,
+	          destination: end,
+	          travelMode: google.maps.TravelMode.DRIVING
+	        }, function(response, status) {
+	          if (status === google.maps.DirectionsStatus.OK) {
+	            directionsDisplay.setDirections(response);
+	          } else {
+	            window.alert('Directions request failed due to ' + status);
+	          }
+	        });
+      	}
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH3GBNl7UFpLh-f7slP-Hl1JW8-VDMrbs&callback=initMap">
