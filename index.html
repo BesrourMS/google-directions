@@ -18,17 +18,15 @@
 		<!-- Chargement de l'API Google maps -->
 		<script>
 		(function() {
-			function initMap() {
-				var directionsDisplay = new google.maps.DirectionsRenderer;
-				var directionsService = new google.maps.DirectionsService;
-				var map = new google.maps.Map(document.getElementById('map'), {
-				  zoom: 7,
-				  center: {lat: 33.8074857, lng: 10.9925425}
-				});
-				directionsDisplay.setMap(map);
-				directionsDisplay.setPanel(document.getElementById('right-panel'));
-				calculateAndDisplayRoute(directionsService, directionsDisplay);
-			}
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var directionsService = new google.maps.DirectionsService;
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 7,
+				center: {lat: 33.8074857, lng: 10.9925425}
+			});
+			directionsDisplay.setMap(map);
+			directionsDisplay.setPanel(document.getElementById('right-panel'));
+			calculateAndDisplayRoute(directionsService, directionsDisplay);
 			if(navigator.geolocation) {
 				function affichePosition(position) {
 					var start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
