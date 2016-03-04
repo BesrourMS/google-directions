@@ -78,7 +78,7 @@
     </style>
   </head>
   <body>
-    <div id="floating-panel">
+    <!--<div id="floating-panel">
       <strong>Start:</strong>
       <select id="start">
         <option value="chicago, il">Chicago</option>
@@ -110,7 +110,7 @@
         <option value="san bernardino, ca">San Bernardino</option>
         <option value="los angeles, ca">Los Angeles</option>
       </select>
-    </div>
+    </div>-->
     <div id="right-panel"></div>
     <div id="map"></div>
     <script>
@@ -124,9 +124,9 @@
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
 
-        var control = document.getElementById('floating-panel');
+        /*var control = document.getElementById('floating-panel');
         control.style.display = 'block';
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);*/
         calculateAndDisplayRoute(directionsService, directionsDisplay);
         /*var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
